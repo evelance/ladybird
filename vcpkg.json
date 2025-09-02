@@ -44,9 +44,7 @@
         "openh264",
         "opus",
         "webp",
-        "theora",
         "vorbis",
-        "vpx",
         "zlib"
       ]
     },

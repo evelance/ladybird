@@ -21,6 +21,7 @@
 #include <LibWasm/Opcode.h>
 #include <LibWasm/Printer/Printer.h>
 #include <LibWasm/Types.h>
+#include <functional>
 
 using namespace AK::SIMD;
 
@@ -2857,9 +2858,11 @@ CompiledInstructions try_compile_instructions(Expression const& expression, Span
         }
     };
 
-    auto find_root = [&parent](this auto& self, ValueID x) -> ValueID {
+    // auto find_root = [&parent]( this auto& self, ValueID x) -> ValueID {
+    //auto find_root = [&parent](auto self, ValueID x) -> ValueID {
+    std::function<ValueID(ValueID)> find_root = [&parent, &find_root](ValueID x) -> ValueID {
         if (parent[x.value()] != x)
-            parent[x.value()] = self(parent[x.value()]);
+            parent[x.value()] = find_root(parent[x.value()]);
         return parent[x.value()];
     };
 
