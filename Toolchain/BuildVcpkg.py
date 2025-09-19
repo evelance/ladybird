@@ -17,7 +17,7 @@ def build_vcpkg():
     with open(script_dir.parent / "vcpkg.json", "r") as vcpkg_json_file:
         vcpkg_json = json.load(vcpkg_json_file)
 
-    git_repo = "https://github.com/microsoft/vcpkg.git"
+    git_repo = "https://github.com/evelance/vcpkg.git"
     git_rev = vcpkg_json["builtin-baseline"]
 
     build_dir = script_dir.parent / "Build"
